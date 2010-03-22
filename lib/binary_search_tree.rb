@@ -31,6 +31,27 @@ class BinarySearchTree
     each_in_order_from(@root, &block)
   end
 
+  def each_pre_order(&block)
+    each_pre_order_from(@root, &block)
+  end
+
+  def each_post_order(&block)
+    each_post_order_from(@root, &block)
+  end
+
+  def each_breadth_first(&block)
+    return if @root.nil?
+
+    queue = [@root]
+
+    until queue.empty?
+      node = queue.shift
+      queue.push node.left unless node.left.nil?
+      queue.push node.right unless node.right.nil?
+      block.call({ :key => node.key, :value => node.value })
+    end
+  end
+
 private
   class TreeNode
     attr_accessor :key, :value, :left, :right
@@ -130,5 +151,21 @@ private
     each_in_order_from(root.left, &block)
     block.call({ :key => root.key, :value => root.value })
     each_in_order_from(root.right, &block)
+  end
+
+  def each_pre_order_from(root, &block)
+    return if root.nil?
+
+    block.call({ :key => root.key, :value => root.value })
+    each_pre_order_from(root.left, &block)
+    each_pre_order_from(root.right, &block)
+  end
+
+  def each_post_order_from(root, &block)
+    return if root.nil?
+
+    each_post_order_from(root.left, &block)
+    each_post_order_from(root.right, &block)
+    block.call({ :key => root.key, :value => root.value })
   end
 end

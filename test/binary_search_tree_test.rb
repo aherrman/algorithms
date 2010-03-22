@@ -95,6 +95,39 @@ class BinarySearchTreeTest < Test::Unit::TestCase
     assert_equal 3, bst.size
   end
 
+  def test_each_pre_order
+    bst = build_bst 10, 2, 11, 1, 6, 4, 8, 3, 5, 7, 9
+
+    nodes = []
+    bst.each_pre_order { |n|
+      nodes.push n[:value]
+    }
+
+    assert_equal [10, 2, 1, 6, 4, 3, 5, 8, 7, 9, 11], nodes
+  end
+
+  def test_each_post_order
+    bst = build_bst 10, 2, 11, 1, 6, 4, 8, 3, 5, 7, 9
+
+    nodes = []
+    bst.each_post_order { |n|
+      nodes.push n[:value]
+    }
+
+    assert_equal [1, 3, 5, 4, 7, 9, 8, 6, 2, 11, 10], nodes
+  end
+
+  def test_each_breadth_first
+    bst = build_bst 10, 2, 11, 1, 6, 4, 8, 3, 5, 7, 9
+
+    nodes = []
+    bst.each_breadth_first { |n|
+      nodes.push n[:value]
+    }
+
+    assert_equal [10, 2, 11, 1, 6, 4, 8, 3, 5, 7, 9], nodes
+  end
+
   def build_bst(*values)
     bst = BinarySearchTree.new
     values.each { |v|

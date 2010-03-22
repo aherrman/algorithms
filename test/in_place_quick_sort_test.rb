@@ -11,6 +11,7 @@ end
 
 class InPlaceQuickSortTest < Test::Unit::TestCase
   def test_sort
+    srand 0 # Force a random seed known to trigger failue
     unsorted = [6, 3, 8, 4, 5, 0, 2, 9, 7, 1]
 
     sorted = IPQSTest.sort unsorted
