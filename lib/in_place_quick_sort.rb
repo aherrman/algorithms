@@ -5,7 +5,7 @@ module InPlaceQuickSort
 
 private
   def sort_in_place(toSort, left, right)
-    return toSort unless right - left > 1
+    return toSort unless right - left >= 1
     pivot = left + rand(right - left)
     pivotValue = toSort[pivot]
 
@@ -21,7 +21,6 @@ private
     end
 
     swap(toSort, currIndex, right)
-
 
     sort_in_place(toSort, left, currIndex - 1)
     sort_in_place(toSort, currIndex + 1, right)
