@@ -1,11 +1,11 @@
 module MergeSort
-  def sort(toSort)
-    return toSort if toSort.size <= 1
+  def sort(to_sort)
+    return to_sort if to_sort.size <= 1
 
-    mid = toSort.size/2
+    mid = to_sort.size/2
 
-    left = sort(toSort[0, mid])
-    right = sort(toSort[mid, toSort.size])
+    left = sort(to_sort[0, mid])
+    right = sort(to_sort[mid, to_sort.size])
 
     merge(left, right)
   end
